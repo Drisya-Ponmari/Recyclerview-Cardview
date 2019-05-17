@@ -1,5 +1,8 @@
+
 package com.example.dris_iit.recyclerview;
 
+import android.app.Activity;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.dris_iit.recyclerview.databinding.CitiesBinding;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CityAdapter adapter;
     private ArrayList<Cities> citiesArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +45,12 @@ public class MainActivity extends AppCompatActivity {
         citiesArrayList.add(new Cities("Banglore","Karnataka"));
         citiesArrayList.add(new Cities("Manglore","Karnataka"));
 
-        recyclerView=(RecyclerView) findViewById(R.id.recycle_view);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         adapter =new CityAdapter(citiesArrayList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter((adapter));
+        recyclerView.setAdapter(adapter);
 
 
     }
-    }
+}

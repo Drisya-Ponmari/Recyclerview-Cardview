@@ -1,10 +1,13 @@
 package com.example.dris_iit.recyclerview;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.dris_iit.recyclerview.databinding.CitiesBinding;
 
 import java.util.ArrayList;
 
@@ -30,24 +33,24 @@ public  class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolde
 
     @Override
     public void onBindViewHolder(CityViewHolder holder, int position) {
-        holder.citynametxt.setText(datalist.get(position).getCityname());
-        holder.statetxt.setText(datalist.get(position).getState());
-    }
+       Cities status=datalist.get(position);
+       holder.bind(status);
+        }
 
     @Override
     public int getItemCount() {
         return datalist.size();
     }
-    class  CityViewHolder extends  RecyclerView.ViewHolder{
-        TextView citynametxt, statetxt;
+    public class  CityViewHolder extends  RecyclerView.ViewHolder{
+        private CitiesBinding binding;
+        public  CityViewHolder(View view){
+            super(view);
+            binding = DataBindingUtil.bind(view);
 
-        CityViewHolder(View itemView){
-
-            super (itemView);
-            citynametxt =(TextView) itemView.findViewById(R.id.city_name);
-            statetxt=(TextView) itemView.findViewById(R.id.state_name);
         }
 
+        public void bind (Cities cities){
+            binding.setPlace(cities);
+        }
     }
 }
-
